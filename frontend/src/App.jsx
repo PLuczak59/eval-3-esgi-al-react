@@ -6,13 +6,7 @@ import { DarkModeContext } from './utils/Contexts/DarkModeContext'
 import { useContext } from 'react'
 
 function App() {
-  let user = {
-    email: "pluczak@myges.fr",
-    firstname: "Pierre-Henri",
-    lastname: "Luczak",
-    role: "admin",
-  }
-  const {darkMode, setDarkMode} = useContext(DarkModeContext);
+  const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
 
   return (
@@ -26,6 +20,7 @@ function App() {
               <Route path="/Home" element={<Home />} />
               <Route path="/Users" element={<UserList />} />
             </Routes>
+
         </BrowserRouter>
       </div>
     </>

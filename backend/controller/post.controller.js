@@ -1,26 +1,41 @@
 const Post = require('../model/post.model.js');
 const Emoticon = require("../model/emoticon.model.js");
+const User = require('../model/user.model.js');
 const fs = require('fs');
 
 const getAll = async (req, res, next) => {
-    let result = await Post.findAll({include: [{model: Emoticon}]});
-     res.status(200).json(result);
+    let result = await Post.findAll({
+        include: [
+            {model: Emoticon},
+            {model: User, attributes: ['id', 'nickname']}
+        ]
+    });
+    res.status(200).json(result);
 }
 
 const getPage = async (req,res) => {
     if(!req.params.page){
         return res.status(400).json({error: "Vous devez sélectionner une page"});
     }
-    let result = await Post.findAll({include: [{model: Emoticon}],limit:5,offset:(req.params.page-1)*5});
-     res.status(200).json(result);
+    let result = await Post.findAll({
+        include: [
+            {model: Emoticon},
+            {model: User, attributes: ['id', 'nickname']}
+        ],
+        limit:5,
+        offset:(req.params.page-1)*5
+    });
+    res.status(200).json(result);
 }
-
 
 const getById = async (req, res, next) => {
     let result = await Post.findOne({
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {model: User, attributes: ['id', 'nickname']}
+        ]
     });
     res.status(200).json(result);
 }

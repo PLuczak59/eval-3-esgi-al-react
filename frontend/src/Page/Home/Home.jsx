@@ -1,13 +1,28 @@
 import "./Home.css";
-import { Button } from '../../Component/components';
+import MessageCard from "../../Component/MessageCard/MessageCard";
+
 import { useState } from "react";
 
 
-export default function Home(){
-    const [test, setTest] = useState(0);
+function PostsList() {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        // Récupérer les posts avec les utilisateurs
+        fetch('/api/posts', {
+            headers: {
+                'Authorization': `Bearer ${token}` // Votre token d'authentification
+            }
+        })
+            .then(response => response.json())
+            .then(data => setPosts(data));
+    }, []);
+
     return (
-        <>
-            <Button text={"compteur : " + test} color="rgb(255, 0, 0)" onClick={() => setTest(test+1)}/>
-        </>
-    )
+        <div>
+            {posts.map(post => (
+                <MessageCard key={post.id} post={post} />
+            ))}
+        </div>
+    );
 }
