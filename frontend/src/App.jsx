@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import { UserList, Home } from './Page/pages'
 import { Login, DarkModeButton } from './Component/components'
-import { DarkModeContext } from './Context/DarkModeContext'
+import { DarkModeContext } from './utils/Contexts/DarkModeContext'
 import { useContext } from 'react'
 
 function App() {
