@@ -26,6 +26,11 @@ const dataset = async () => {
                 password: bcrypt.hashSync('12345', 10),
                 nickname: "Thomas"
             },
+                        {
+                email: "pluczak@myges.fr",
+                password: bcrypt.hashSync('Password123!', 10),
+                nickname: "PierreH"
+            },
             {
                 email: "marie.dupont@email.com",
                 password: bcrypt.hashSync('password123', 10),

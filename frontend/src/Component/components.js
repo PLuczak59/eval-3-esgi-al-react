@@ -4,3 +4,5 @@ export { default as UserCard } from './UserCard/UserCard';
 export { default as PasswordField } from './PasswordField/PasswordField';
 export { default as DarkModeButton } from './DarkModeButton/DarkModeButton';
 export { default as Button } from './Button/Button';
+export { default as LogoutButton } from './LogoutButton/LogoutButton';
+export { default as MessageCard } from './MessageCard/MessageCard';

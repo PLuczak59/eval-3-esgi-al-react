@@ -1,28 +1,24 @@
 import "./Home.css";
-import MessageCard from "../../Component/MessageCard/MessageCard";
+import { MessageCard, LogoutButton } from "../../Component/components";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
 
-
-function PostsList() {
-    const [posts, setPosts] = useState([]);
+export default function Home() {
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Récupérer les posts avec les utilisateurs
-        fetch('/api/posts', {
-            headers: {
-                'Authorization': `Bearer ${token}` // Votre token d'authentification
-            }
-        })
-            .then(response => response.json())
-            .then(data => setPosts(data));
+        let token = localStorage.getItem('token');
+        if(!token){
+            navigate("/");
+        }
     }, []);
+
 
     return (
         <div>
-            {posts.map(post => (
-                <MessageCard key={post.id} post={post} />
-            ))}
+            <LogoutButton />
+            <h1>Welcome to the Home Page</h1>
         </div>
     );
 }
