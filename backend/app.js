@@ -3,6 +3,7 @@ const authRoute =require("./route/auth.route.js");
 const userRoute =require("./route/user.route.js");
 const postRoute =require("./route/post.route.js");
 const emoticonRoute =require("./route/emoticon.route.js");
+const cors =require("cors");
 const {connect} = require('./model/connexion.js');
 const sync = require('./model/sync.js');
 const dataset = require("./model/dataset.js");
@@ -18,6 +19,7 @@ database();
 
 app.use(cors())
 app.use(express.json());
+app.use(cors());
 
 app.use('/auth',authRoute);
 app.use('/user', userRoute);
