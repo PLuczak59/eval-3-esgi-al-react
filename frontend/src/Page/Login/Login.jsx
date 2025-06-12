@@ -9,10 +9,9 @@ export default function Login(){
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
-    async function login(e){
-        e.preventDefault();
+    async function login(){
         try {
-            await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/auth/login`, {
+            fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -21,7 +20,8 @@ export default function Login(){
                     email: email,
                     password: password.password
                 })
-            }).then(response => response.json())
+            })
+            .then(response => response.json())
             .then(response => {
                 if (!response.jwt) {
                     setError(true);
@@ -37,7 +37,7 @@ export default function Login(){
             });
             
 
-        } catch (error) {
+        } catch (err) {
             setError(true);
         }
     }
@@ -47,23 +47,21 @@ export default function Login(){
     }
 
     return (
-        <form className="form" onSubmit={login}>
+        <form className="form">
             <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
 
-            <PasswordField onKeyUp={onPasswordChange} needStrength={false} />
+            <PasswordField onKeyUp={onPasswordChange}/>
 
             <div className="form-group">
-                <button type="submit" className="valid-button">
+                <button type="button" className="valid-button" onClick={login}>
                     Se connecter
                 </button>
             </div>
 
-            <div className="register-form-btn">
-                <p>Vous n'avez pas de compte ? <a href="/Register">Inscrivez-vous</a></p>
-            </div>
+            <p>Vous n'avez pas de compte ? <a href="/Register">Inscrivez-vous</a></p>
 
             {error &&
                 <span className="form-error">Email ou mot de passe incorrect</span>
