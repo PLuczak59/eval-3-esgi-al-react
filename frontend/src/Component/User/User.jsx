@@ -40,12 +40,12 @@ function User({ user }) {
 
             <br />
 
-            <div className="form-group">
+            {/* <div className="form-group">
                 <label htmlFor="">Image</label>
                 <div className="image">
                     <img src={user.image} alt="user profile" />
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }

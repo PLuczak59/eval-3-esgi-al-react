@@ -11,7 +11,11 @@ const User = bdd.define('user',{
   },
   nickname: {
     type: DataTypes.STRING
-  }
+  },
+  // image: {
+  //   type: DataTypes.STRING,
+  //   defaultValue: ''
+  // },
 });
 
 module.exports = User;

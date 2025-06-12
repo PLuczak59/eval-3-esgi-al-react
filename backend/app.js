@@ -5,11 +5,13 @@ const postRoute =require("./route/post.route.js");
 const emoticonRoute =require("./route/emoticon.route.js");
 const {connect} = require('./model/connexion.js');
 const sync = require('./model/sync.js');
+const dataset = require("./model/dataset.js");
 const app = express();
 
 const database = async () => {
     await connect();
     await sync();
+    await dataset();
 }
 database();
 

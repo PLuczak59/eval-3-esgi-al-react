@@ -1,19 +1,28 @@
 import "./Home.css";
 import MessageCard from "../../Component/MessageCard/MessageCard";
-import user from "../../Data/user.json";
+
 import { useState } from "react";
 
 
-export default function Home() {
-    const [test, setTest] = useState(0);
+function PostsList() {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        // Récupérer les posts avec les utilisateurs
+        fetch('/api/posts', {
+            headers: {
+                'Authorization': `Bearer ${token}` // Votre token d'authentification
+            }
+        })
+            .then(response => response.json())
+            .then(data => setPosts(data));
+    }, []);
+
     return (
-        <>
-            <div className="home">
-                <h1>Welcome to the Home Page</h1>
-
-                <MessageCard user={user} Post={Post} />
-
-            </div>
-        </>
-    )
+        <div>
+            {posts.map(post => (
+                <MessageCard key={post.id} post={post} />
+            ))}
+        </div>
+    );
 }
