@@ -1,11 +1,20 @@
 import "./UserList.css";
 import { UserCard } from "../../Component/components";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export default function UserList(){
     const [listUser, setListUser] = useState([]);
     const [pageCount, setPageCount] = useState(1);
+    const navigate = useNavigate();
+
+        useEffect(() => {
+        let token = localStorage.getItem('token');
+        if(!token){
+            navigate("/");
+        }
+    }, []);
     
     useEffect(() => {
         fetch(`http://localhost:3000/user/${pageCount}`,{

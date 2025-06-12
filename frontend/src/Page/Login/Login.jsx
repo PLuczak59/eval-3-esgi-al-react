@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PasswordField } from "../../Component/components";
 
@@ -8,6 +8,13 @@ export default function Login(){
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const navigate = useNavigate();
+    
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate("/Home");
+        }
+    }, []);
 
     async function login(){
         try {
