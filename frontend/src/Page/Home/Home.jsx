@@ -1,13 +1,19 @@
 import "./Home.css";
-import { Button } from '../../Component/components';
+import MessageCard from "../../Component/MessageCard/MessageCard";
+import user from "../../Data/user.json";
 import { useState } from "react";
 
 
-export default function Home(){
+export default function Home() {
     const [test, setTest] = useState(0);
     return (
         <>
-            <Button text={"compteur : " + test} color="rgb(255, 0, 0)" onClick={() => setTest(test+1)}/>
+            <div className="home">
+                <h1>Welcome to the Home Page</h1>
+
+                <MessageCard user={user} Post={Post} />
+
+            </div>
         </>
     )
 }

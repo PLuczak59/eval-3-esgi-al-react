@@ -2,8 +2,8 @@ import "./User.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCrown, faUser } from '@fortawesome/free-solid-svg-icons';
 
-function User({user}) {
-    function showNumbers (number, index) {
+function User({ user }) {
+    function showNumbers(number, index) {
         return (
             <div key={index} className="number">
                 {number}
@@ -12,7 +12,7 @@ function User({user}) {
     }
 
     return (
-         <>
+        <>
             <div className="form-group">
                 <label htmlFor="">Email</label>
                 <div className="email">{user.email}</div>
@@ -20,28 +20,31 @@ function User({user}) {
             <br />
 
             <div className="form-group">
-                <label htmlFor="">Prénom</label>
-                <div className="firstname">{user.firstname}</div>
-            </div>
-            <br />
-
-            <div className="form-group">
-                <label htmlFor="">Nom</label>
-                <div className="lastname">{user.lastname}</div>
+                <label htmlFor="">Nickname</label>
+                <div className="nickname">{user.nickname}</div>
             </div>
             <br />
 
             <div className="form-group">
                 <label htmlFor="">Rôle</label>
-                {user.role === "admin" && 
+                {user.role === "admin" &&
                     <div className="role"><FontAwesomeIcon icon={faCrown} /></div>
                 }
                 {user.role !== "admin" &&
                     <div className="role"><FontAwesomeIcon icon={faUser} /></div>
                 }
                 {
-                    Object.entries([1, 2, 3]).map(([key, value]) =>  showNumbers(value, key))
+                    Object.entries([1, 2, 3]).map(([key, value]) => showNumbers(value, key))
                 }
+            </div>
+
+            <br />
+
+            <div className="form-group">
+                <label htmlFor="">Image</label>
+                <div className="image">
+                    <img src={user.image} alt="user profile" />
+                </div>
             </div>
         </>
     );
