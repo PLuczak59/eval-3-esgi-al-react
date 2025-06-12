@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import Cookies from "js-cookie";
 
 
 export function useGetRequest(url, autoFetch = true) {

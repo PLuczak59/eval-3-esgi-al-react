@@ -1,11 +1,11 @@
 // useDeleteRequest.js
 import { useState, useEffect } from "react";
 
-export function useDeleteRequest() {
+export function useDeleteRequest(url) {
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const deleteData = async (url) => {
+    const deleteData = async () => {
         try {
             setLoading(true);
             const token = Cookies.get("token");
