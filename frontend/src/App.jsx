@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import { UserList, Home } from './Page/pages'
-import { Login, DarkModeButton } from './Component/components'
+import { UserList, Home, Login, Register } from './Page/pages'
+import { DarkModeButton } from './Component/components'
 import { DarkModeContext } from './utils/Contexts/DarkModeContext'
 import { useContext } from 'react'
 
@@ -21,8 +21,9 @@ function App() {
         <DarkModeButton />
           <BrowserRouter>
             <Routes>
-              <Route path="/Login" element={<Login />} />
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/Register" element={<Register />} />
+              <Route path="/Home" element={<Home />} />
               <Route path="/Users" element={<UserList />} />
             </Routes>
         </BrowserRouter>

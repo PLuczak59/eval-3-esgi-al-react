@@ -22,19 +22,21 @@ exports.login = async (req, res, next) => {
     try {
         let user = await User.findOne({where:{ email: req.body.email }});
         if (!user) {
-            res.status(401).json({ message: "Identifiant ou mot de passe incorrect" });
+            return res.status(401).json({ message: "Identifiant ou mot de passe incorrect" });
         }
         if (!bcrypt.compareSync(req.body.password, user.password)) {
-            res.status(401).json({ message: "Identifiant ou mot de passe incorrect" });
+            return res.status(401).json({ message: "Identifiant ou mot de passe incorrect" });
         }
-        res.status(200).json({
+        return res.status(200).json({
             email: user.email,
+            id: user.id,
+            username: user.nickname,
             jwt: jwt.sign({
                 email: user.email,
                 id: user.id
             }, process.env.JWT_TOKEN)
         });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }

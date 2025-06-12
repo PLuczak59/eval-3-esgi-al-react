@@ -4,17 +4,25 @@ import { useState } from "react";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { checkPasswordComplexity } from "check-password-complexity";
 
-export default function PasswordField({onKeyUp}) {
+export default function PasswordField({onKeyUp, needStrength}) {
     const [showPassword, setShowPassword] = useState(false);
     const [score, setScore] = useState(0);
 
     function onPasswordChange(e){
         const res = checkPasswordComplexity(e.target.value);
         setScore(res.score);
-        onKeyUp({
-            password: e.value,
-            streght: res.score
-        })
+
+
+        if(needStrength) {
+            onKeyUp({
+                password: e.target.value,
+                complexity: res
+            });
+        }else {
+            onKeyUp({
+                password: e.target.value
+            });
+        }
     }
 
     return (
@@ -25,17 +33,17 @@ export default function PasswordField({onKeyUp}) {
                 className="password-field" 
                 name="password" 
                 id="password" 
-                onKeyUp={(e) => onKeyUp(onPasswordChange)}
+                onKeyUp={onPasswordChange}
                 required
             />
             <div className="show-password">
-                    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} className="eye-icon" onClick={() => setShowPassword(!showPassword)} />
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className="eye-icon" onClick={() => setShowPassword(!showPassword)} />
             </div>
 
             <div className="progress-bar">
 
                 
-                <div className="complexity-percent-${complexityLevel}"></div>
+                <div className="complexity-percent-${score}"></div>
             </div>
         </div>
     )
