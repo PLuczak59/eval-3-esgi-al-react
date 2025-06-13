@@ -1,15 +1,28 @@
 import "./Home.css";
 import MessageCard from "../../Component/MessageCard/MessageCard";
-import { useState, useEffect } from "react";
+import { useGetRequest } from "../../utils/Hooks/useGetRequest";
 
-function PostsList() {
+export default function Home() {
+    const { data: posts, isLoading, error } = useGetRequest('/post');
+
+    if (isLoading) {
+        return <div>Chargement des posts...</div>;
+    }
+
+    if (error) {
+        return <div>Erreur lors du chargement des posts: {error}</div>;
+    }
+
     return (
-        <div>
-            {posts.map(post => (
-                <MessageCard key={post.id} post={post} />
-            ))}
+        <div className="home">
+            <h1>Posts</h1>
+            {posts && posts.length > 0 ? (
+                posts.map(post => (
+                    <MessageCard key={post.id} post={post} />
+                ))
+            ) : (
+                <p>Aucun post disponible</p>
+            )}
         </div>
     );
 }
-
-export default PostsList;

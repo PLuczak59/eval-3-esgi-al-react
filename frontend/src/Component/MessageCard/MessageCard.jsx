@@ -9,7 +9,7 @@ export default function MessageCard({ post }) {
             <div className="message-card-name">
                 <p>{post.message}</p>
                 {post.picture && (
-                    <img src={`/images/${post.picture}`} alt="post picture" />
+                    <img src={`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/images/${post.picture}`} alt="post picture" />
                 )}
             </div>
         </div>

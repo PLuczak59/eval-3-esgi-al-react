@@ -7,7 +7,7 @@ const usePutRequest = (url) => {
     const fetchData = async (formData) => {
         try {
             setLoading(true);
-            const token = Cookies.get('token');
+            const token = localStorage.getItem('token');
             const response = await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}${url}`, {
                 method: 'PUT',
                 headers: {
