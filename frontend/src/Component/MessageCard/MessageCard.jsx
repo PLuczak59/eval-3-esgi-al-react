@@ -147,29 +147,36 @@ export default function MessageCard({ post, onRefresh }) {
             <div className="message-card-content">
                 {editMode ? (
                     <div className="edit-container">
+
                         <textarea
                             value={editedMessage}
                             onChange={(e) => setEditedMessage(e.target.value)}
                             disabled={loading}
                         />
+
                         <div className="edit-buttons">
                             <button onClick={saveEdit} disabled={loading} className="save-btn">
                                 <FontAwesomeIcon icon={faCheck} /> Enregistrer
                             </button>
+
                             <button onClick={() => {
                                 setEditMode(false);
                                 setEditedMessage(post.message);
                             }} disabled={loading} className="cancel-btn">
                                 <FontAwesomeIcon icon={faTimes} /> Annuler
                             </button>
+
                         </div>
                     </div>
+
                 ) : (
-                    <p>{post.message}</p>
+                    <div className="message-content">
+                        <p>{post.message}</p>
+                    </div>
                 )}
 
                 {post.picture && (
-                    <img src={`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/images/${post.picture}`} alt="image" />
+                    <img className="message-image" src={`http://localhost:3000/images/${post.picture}`} alt="image" />
                 )}
             </div>
 

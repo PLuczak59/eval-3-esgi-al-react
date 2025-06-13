@@ -17,9 +17,11 @@ const database = async () => {
 }
 database();
 
-app.use(cors());
+
 app.use(express.json());
 app.use(cors());
+
+app.use('/images', express.static('images'));
 
 app.use('/auth',authRoute);
 app.use('/user', userRoute);
