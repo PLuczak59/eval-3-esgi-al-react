@@ -1,15 +1,11 @@
 import "./Home.css";
 import { MessageCard, LogoutButton } from "../../Component/components";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetRequest } from "../../utils/Hooks/useGetRequest";
 
 export default function Home() {
     const { data: posts, isLoading, error, refetch } = useGetRequest('/post');
-
-    if (isLoading) {
-        return <div>Chargement des posts...</div>;
-    }
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,6 +14,10 @@ export default function Home() {
             navigate("/");
         }
     }, []);
+
+    if (isLoading) {
+        return <div>Chargement des posts...</div>;
+    }
 
     if (error) {
         return <div>Erreur lors du chargement des posts: {error}</div>;
