@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 
-
 export function useGetRequest(url, autoFetch = true) {
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(false);

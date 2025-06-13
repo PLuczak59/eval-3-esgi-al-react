@@ -1,19 +1,33 @@
 import "./Home.css";
-import { MessageCard, LogoutButton } from "../../Component/components";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { MessageCard, Toolbar } from "../../Component/components";
+import { useState, useEffect } from "react";
 import { useGetRequest } from "../../utils/Hooks/useGetRequest";
 
-export default function Home() {
-    const { data: posts, isLoading, error, refetch } = useGetRequest('/post');
-    const navigate = useNavigate();
+export default function Home() {   
+    const { data, isLoading, error } = useGetRequest('/post');
+    const [posts, setPosts] = useState([]); 
 
     useEffect(() => {
-        let token = localStorage.getItem('token');
-        if (!token) {
-            navigate("/");
+        if (data) {
+        setPosts(data);
         }
-    }, []);
+    }, [data]);
+
+    const handlePostCreated = (newPost) => {
+        newPost = {
+            ...newPost,
+            user:{
+                id: newPost.authorId,
+                nickname: JSON.parse(localStorage.getItem('user')).username || "Anonyme",
+            }
+        }
+
+        setPosts(currentPosts => {
+            const updatedPosts = [newPost, ...currentPosts]; 
+            return updatedPosts;
+        });
+    };
+
 
     if (isLoading) {
         return <div>Chargement des posts...</div>;
@@ -26,15 +40,20 @@ export default function Home() {
 
     return (
         <div className="home">
-            <LogoutButton />
-            <h1>Posts</h1>
-            {posts && posts.length > 0 ? (
-                posts.map(post => (
-                    <MessageCard key={post.id} post={post} onRefresh={refetch} />
-                ))
-            ) : (
-                <p>Aucun post disponible</p>
-            )}
+            <Toolbar onAddPost={handlePostCreated}/>
+
+            <div className="post-list">
+                <h1>Posts</h1>
+                <div className="post-cards">
+                    {posts && posts.length > 0 ? (
+                        posts.map(post => (
+                            <MessageCard key={post.id} post={post}/>
+                        ))
+                    ) : (
+                        <p>Aucun post disponible</p>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

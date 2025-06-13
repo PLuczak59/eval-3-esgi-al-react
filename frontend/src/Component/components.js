@@ -1,8 +1,9 @@
-export { default as User } from './User/User';
-export { default as UpdateUser } from './UpdateUser/UpdateUser';
-export { default as UserCard } from './UserCard/UserCard';
 export { default as PasswordField } from './PasswordField/PasswordField';
 export { default as DarkModeButton } from './DarkModeButton/DarkModeButton';
 export { default as Button } from './Button/Button';
 export { default as LogoutButton } from './LogoutButton/LogoutButton';
 export { default as MessageCard } from './MessageCard/MessageCard';
+export { default as Modal } from './Modal/Modal';
+export { default as Toolbar } from './Toolbar/Toolbar';
+export { default as AddMessageForm } from './AddMessageForm/AddMessageForm';
+export { default as EditMessageForm } from './EditMessageForm/EditMessageForm';

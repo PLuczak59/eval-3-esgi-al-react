@@ -26,7 +26,7 @@ export default function Register() {
             return;
         }
 
-        if (password.password !== confirmPassword.confirmPassword) {
+        if (password !== confirmPassword) {
             setError("Les mots de passes ne sont pas identiques.");
             return;
         }    
@@ -39,7 +39,7 @@ export default function Register() {
             body: JSON.stringify({
                 email: email,
                 nickname: username,
-                password: password.password,
+                password: password,
             })
         })
         .then((response) => {

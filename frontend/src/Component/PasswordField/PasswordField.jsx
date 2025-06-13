@@ -6,19 +6,6 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 export default function PasswordField({onKeyUp, isConfirm = false}) {
     const [showPassword, setShowPassword] = useState(false);
 
-    function onPasswordChange(e){
-
-        if(isConfirm) {
-            onKeyUp({
-                confirmPassword: e.target.value
-            });
-        }else {
-            onKeyUp({
-                password: e.target.value
-            });
-        }
-    }
-
     return (
         <div className="form-group">
             <label htmlFor={isConfirm ? "confirmPassword" : "password"}>{isConfirm ? "Confirm Password" : "Password"}</label>
@@ -28,7 +15,7 @@ export default function PasswordField({onKeyUp, isConfirm = false}) {
                 className="password-field" 
                 name={isConfirm ? "confirmPassword" : "password"}
                 id={isConfirm ? "confirmPassword" : "password"} 
-                onKeyUp={onPasswordChange}
+                onKeyUp={(e) => onKeyUp(e.target.value)}
                 required
             />
             <div className="show-password">
