@@ -8,7 +8,7 @@ export function useDeleteRequest(url) {
     const deleteData = async () => {
         try {
             setLoading(true);
-            const token = Cookies.get("token");
+            const token = localStorage.getItem("token");
             const response = await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}${url}`, {
                 method: "DELETE",
                 headers: {

@@ -1,34 +1,175 @@
+
+
 .message-card {
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 2rem 1.5rem;
-  display: flex;
-  align-items: center;
-  transition: transform 0.15s, box-shadow 0.15s;
-  gap: 1.5rem;
-  border: 1px solid #e0e0e0;
+  background-color: #5d5a89;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid black;
+  
 }
 
 .message-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+  border: 5px solid #1877F2;
 }
 
-.message-card img {
-  width: 72px;
-  height: 72px;
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message-image {
+  width: 80%;
+  max-width: 400px;
+  object-fit: contain;
+  margin:auto;
+  
+}
+
+.message-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #000000;
+  padding: 4px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #e0e0e0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }
 
-.message-card-name h2 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.3rem;
+.action-btn.edit {
+  color: #1877F2;
+}
+
+.action-btn.delete {
+  color: #E41E3F;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-container textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.save-btn, .cancel-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.message-card-name p {
-  margin: 0.2rem 0;
-  font-size: 1rem;
+.save-btn {
+  background-color: #007a14;
+  color: rgb(68, 68, 68);
+}
+
+.cancel-btn {
+  background-color: #c6c6c6;
+  color: #050505;
+}
+
+.edit-container textarea:focus {
+  outline: none;
+  border-color: #1877F2;
+  box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+}
+
+.message-card-reactions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reaction-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background-color: white;
+  color: #333;
+}
+
+.reaction-btn:hover {
+  transform: scale(1.05);
+}
+
+.reaction-btn span {
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.reaction-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reaction-btn:nth-child(1) {
+  background-color: white;
+  color: #333;
+}
+
+.reaction-btn:nth-child(1).active {
+  background-color: white;
+  color: #007a14; /* Vert */
+  box-shadow: 0 0 0 2px #007a14;
+}
+
+.reaction-btn:nth-child(2) {
+  background-color: white;
+  color: #333;
+}
+
+.reaction-btn:nth-child(2).active {
+  background-color: white;
+  color: #E41E3F; /* Rouge */
+  box-shadow: 0 0 0 2px #E41E3F;
+}
+
+.reaction-btn:nth-child(3) {
+  background-color: white;
+  color: #333;
+}
+
+.reaction-btn:nth-child(3).active {
+  background-color: #E41E3F;
+  color: white;
 }
