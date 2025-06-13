@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Cookies from 'js-cookie';
 
 export function usePostRequest(url) {
     const [data, setData] = useState(null);
@@ -61,7 +60,7 @@ export function usePostRequestFormData(url) {
         setLoading(true);
 
         try {
-            const token = Cookies.get('token');
+            const token = localStorage.getItem('token');
             const response = await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}${url}`, {
                 method: 'POST',
                 headers: {

@@ -1,5 +1,5 @@
 // useDeleteRequest.js
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function useDeleteRequest(url) {
     const [isLoading, setLoading] = useState(false);

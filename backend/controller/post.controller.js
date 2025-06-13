@@ -51,9 +51,9 @@ const create = async (req, res, next) => {
     }
     try {
         let result = await Post.create(post);
-        res.status(201).json(result);
+        return res.status(201).json(result);
     } catch (e) {
-        res.status(400).json({ error: e.message });
+        return res.status(400).json({ error: e.message });
     }
 }
 
@@ -74,7 +74,7 @@ const update = async (req, res, next) => {
         }
     }
     await post.save();
-    res.status(200).json(post);
+    return res.status(200).json(post);
 }
 
 const remove = (req, res, next) => {
