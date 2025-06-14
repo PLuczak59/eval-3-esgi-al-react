@@ -8,7 +8,7 @@
 }
 
 .home h1 {
-  color: #00449d;
+  color: #064494;
   font-size: 28px;
   margin-bottom: 20px;
   position: relative;
@@ -24,23 +24,18 @@
   transform: translateX(-50%);
   width: 80px;
   height: 3px;
-  background-color: #00449d;
+  background-color: #064494;
   border-radius: 2px;
 }
 
-/* Animation des posts */
-.message-card-enter {
-  opacity: 0;
-  transform: translateY(20px);
+.app-dark .home h1 {
+  color: #064494;
 }
 
-.message-card-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
+.app-dark .home h1::after {
+  background-color: #064494;
 }
 
-/* États de chargement et d'erreur */
 .loading-container, .error-container {
   display: flex;
   flex-direction: column;
@@ -53,8 +48,10 @@
   text-align: center;
 }
 
-.loading-container {
-  animation: pulse 1.5s infinite;
+.app-dark .loading-container, 
+.app-dark .error-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .loading-container::after {
@@ -62,7 +59,7 @@
   width: 40px;
   height: 40px;
   border: 5px solid #f3f3f3;
-  border-top: 5px solid #1877F2;
+  border-top: 5px solid #064494;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-top: 20px;
@@ -74,27 +71,11 @@
   border-left: 4px solid #d32f2f;
 }
 
-.empty-posts {
-  text-align: center;
-  padding: 40px;
-  background-color: #f0f2f5;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #65676b;
-}
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-@keyframes pulse {
-  0% { opacity: 0.8; }
-  50% { opacity: 1; }
-  100% { opacity: 0.8; }
-}
-
-/* Media queries pour responsive design */
 @media (max-width: 768px) {
   .home {
     padding: 15px;
@@ -102,11 +83,5 @@
   
   .home h1 {
     font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .home h1 {
-    font-size: 20px;
   }
 }

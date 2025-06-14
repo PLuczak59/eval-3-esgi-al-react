@@ -7,4 +7,17 @@
   background-color: #ffffff;
   color: #000000;
 }
-  
+
+.theme-toggle-btn {
+  border: 2px solid #ffffff;
+  background: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #fcf800;
+  margin-left: 10px;
+}

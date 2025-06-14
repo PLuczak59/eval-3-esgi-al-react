@@ -1,13 +1,54 @@
-.app-dark{
+.app-dark {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #121212;
   color: #ffffff;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.app{
+.app {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #ffffff;
   color: #000000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-dark .toolbar,
+.app-dark .message-card,
+.app-dark .post-list {
+  background-color: #1e1e1e;
+  color: #fff;
+  border-color: #333;
+}
+
+.app-dark button:not(.theme-toggle-btn) {
+  background-color: #333;
+  color: #eee;
+}
+
+.app-dark input, 
+.app-dark textarea {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+.app-dark .form-input,
+.app-dark .message-content {
+  background-color: #2a2a2a;
+}
+
+.app-dark h1,
+.app-dark h2,
+.app-dark h3 {
+  color: #233988;
+}
+
+.app-dark .pagination-container .page-btn {
+  background: #333;
+}
+
+.app-dark .pagination-container .active-page {
+  background: #466082;
 }

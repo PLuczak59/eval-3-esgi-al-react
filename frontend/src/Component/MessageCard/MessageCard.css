@@ -11,7 +11,7 @@
 
 .message-card:hover {
   transform: translateY(-2px);
-  border: 5px solid #1877F2;
+  border: 5px solid #064494;
 }
 
 .message-header {
@@ -52,7 +52,7 @@
 }
 
 .action-btn.edit {
-  color: #1877F2;
+  color: #064494;
 }
 
 .action-btn.delete {
@@ -103,7 +103,7 @@
 
 .edit-container textarea:focus {
   outline: none;
-  border-color: #1877F2;
+  border-color: #064494;
   box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
 }
 
@@ -150,7 +150,7 @@
 
 .reaction-btn:nth-child(1).active {
   background-color: white;
-  color: #007a14; /* Vert */
+  color: #007a14;
   box-shadow: 0 0 0 2px #007a14;
 }
 
@@ -161,7 +161,7 @@
 
 .reaction-btn:nth-child(2).active {
   background-color: white;
-  color: #E41E3F; /* Rouge */
+  color: #E41E3F;
   box-shadow: 0 0 0 2px #E41E3F;
 }
 

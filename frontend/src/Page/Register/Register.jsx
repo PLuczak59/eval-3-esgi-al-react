@@ -11,43 +11,43 @@ export default function Register() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-    useEffect(() => {
-      const token = localStorage.getItem('token');
-        if (token) {
-          navigate("/Home");
-        }
-    }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate("/Home");
+    }
+  }, []);
 
   async function register() {
 
     try {
-        if (!email || !username || !password || !confirmPassword) {
-            setError("Tous les champs sont obligatoires.");
-            return;
-        }
+      if (!email || !username || !password || !confirmPassword) {
+        setError("Tous les champs sont obligatoires.");
+        return;
+      }
 
-        if (password !== confirmPassword) {
-            setError("Les mots de passes ne sont pas identiques.");
-            return;
-        }    
+      if (password !== confirmPassword) {
+        setError("Les mots de passes ne sont pas identiques.");
+        return;
+      }
 
-        fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/auth/signin`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                nickname: username,
-                password: password,
-            })
+      fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          nickname: username,
+          password: password,
         })
+      })
         .then((response) => {
-            if (!response.ok) {
-                setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard.")
-            }
-            
-            navigate("/");
+          if (!response.ok) {
+            setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard.")
+          }
+
+          navigate("/");
         });
     } catch (err) {
       setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer plus tard.");
@@ -63,45 +63,47 @@ export default function Register() {
   }
 
   return (
-    <form className="form">
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
+    <div className="register-page">
+      <form className="form">
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
-        <input
-          type="username"
-          name="username"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="username"
+            name="username"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
 
-      <PasswordField onKeyUp={onPasswordChange} />
-      <PasswordField onKeyUp={onConfirmPasswordChange} isConfirm={true} />
+        <PasswordField onKeyUp={onPasswordChange} />
+        <PasswordField onKeyUp={onConfirmPasswordChange} isConfirm={true} />
 
-      <div className="form-group">
-        <button type="button" className="valid-button" onClick={register}>
-          S'inscrire
-        </button>
-      </div>
+        <div className="form-group">
+          <button type="button" className="valid-button" onClick={register}>
+            S'inscrire
+          </button>
+        </div>
 
-      <p>
-        Vous avez déjà un compte ? <a href="/">Se connecter</a>
-      </p>
+        <p>
+          Vous avez déjà un compte ? <a href="/">Se connecter</a>
+        </p>
 
-      {error && <span className="form-error">{error}</span>}
-    </form>
+        {error && <span className="form-error">{error}</span>}
+      </form>
+    </div>
   );
 }

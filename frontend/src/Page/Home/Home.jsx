@@ -11,7 +11,6 @@ export default function Home() {
 
     useEffect(() => {
         if (data) {
-            console.log("Data reçue:", data)
             setPosts(data.posts || []);
             setTotalPage(data.totalPages || 1)
         }
@@ -57,7 +56,7 @@ export default function Home() {
         <div className="home">
             <Toolbar onAddPost={handlePostCreated} />
 
-            <div className="post-list">
+            <div>
                 <h1>Posts</h1>
                 <div className="post-cards">
                     {posts && posts.length > 0 ? (
