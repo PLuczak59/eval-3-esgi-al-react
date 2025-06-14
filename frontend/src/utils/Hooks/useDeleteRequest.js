@@ -1,15 +1,16 @@
-// useDeleteRequest.js
 import { useState } from "react";
 
-export function useDeleteRequest(url) {
+export function useDeleteRequest(url = '') {
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const deleteData = async () => {
+    const deleteData = async (urlOverride = '') => {
+        const finalUrl = urlOverride || url;
+        
         try {
             setLoading(true);
             const token = localStorage.getItem("token");
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}${url}`, {
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}${finalUrl}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -19,14 +20,14 @@ export function useDeleteRequest(url) {
 
             if (!response.ok) {
                 const responseData = await response.json();
-                setError(
-                    responseData.message ||
-                    "Une erreur est survenue lors de la suppression."
-                );
+                throw new Error(responseData.message || "Erreur de suppression");
             }
+            
+            return true;
         } catch (err) {
             console.error("Erreur lors de la suppression des données :", err);
-            setError(err.message || true);
+            setError(err.message || "Erreur inconnue");
+            return false;
         } finally {
             setLoading(false);
         }
