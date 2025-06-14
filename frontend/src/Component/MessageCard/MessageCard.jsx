@@ -2,16 +2,23 @@ import "./MessageCard.css";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown, faHeart, faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import{ Modal, EditMessageForm } from '../components';
+import { Modal, EditMessageForm } from '../components';
+import { usePostRequest } from "../../utils/Hooks/usePostRequest";
 
-export default function MessageCard({ post}) {
+export default function MessageCard({ post, onRefresh }) {
     const [myReaction, setMyReaction] = useState(null);
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const userId = JSON.parse(localStorage.getItem('user'))?.id;
     const isMyPost = userId === post.authorId;
 
+    const [localEmoticons, setLocalEmoticons] = useState(post.emoticons || []);
+
+    const { postData } = usePostRequest('/emoticon');
+
     useEffect(() => {
+        setLocalEmoticons(post.emoticons || [])
+
         if (post.emoticons?.length > 0 && userId) {
             const found = post.emoticons.find(e => e.userId === userId);
             if (found) setMyReaction(found);
@@ -30,6 +37,8 @@ export default function MessageCard({ post}) {
                         'Authorization': `Bearer ${token}`,
                     }
                 });
+
+                setLocalEmoticons(prev => prev.filter(e => e.id !== myReaction.id))
                 setMyReaction(null);
             } else {
                 if (myReaction) {
@@ -39,28 +48,27 @@ export default function MessageCard({ post}) {
                             'Authorization': `Bearer ${token}`,
                         }
                     });
+
+                    setLocalEmoticons(prev => prev.filter(e => e.id !== myReaction.id))
                 }
 
-                const resp = await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/emoticon`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        emoticon: type,
-                        postId: post.id
-                    })
+                const response = await postData({
+                    emoticon: type,
+                    postId: post.id
                 });
 
-                if (resp.ok) {
-                    const data = await resp.json();
-                    setMyReaction(data);
+                if (response) {
+                    const newEmoticon = {
+                        ...response,
+                        userId: userId,
+                        type: type
+                    };
+
+                    setLocalEmoticons(prev => [...prev, newEmoticon])
+                    setMyReaction(newEmoticon);
                 }
             }
 
-
-            onRefresh();
         } catch (err) {
             console.error("Erreur avec la réaction:", err);
         }
@@ -90,8 +98,8 @@ export default function MessageCard({ post}) {
     };
 
     const countReactions = (type) => {
-        if (!post.emoticons) return 0;
-        return post.emoticons.filter(e => e.type === type).length;
+        if (!localEmoticons) return 0;
+        return localEmoticons.filter(e => e.type === type).length;
     };
 
     return (
@@ -109,12 +117,12 @@ export default function MessageCard({ post}) {
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     </div>
-                    
+
                 }
             </div>
 
             <div className="message-card-content">
-                
+
                 <div className="message-content">
                     <p>{post.message}</p>
                 </div>
@@ -125,7 +133,6 @@ export default function MessageCard({ post}) {
             </div>
 
             <div className="message-card-reactions">
-                {/* J'aime */}
                 <button
                     className={`reaction-btn ${myReaction?.type === 'like' ? 'active' : ''}`}
                     onClick={() => handleReaction('like')}
@@ -135,7 +142,6 @@ export default function MessageCard({ post}) {
                     <span>{countReactions('like')}</span>
                 </button>
 
-                {/* J'aime pas */}
                 <button
                     className={`reaction-btn ${myReaction?.type === 'dislike' ? 'active' : ''}`}
                     onClick={() => handleReaction('dislike')}
@@ -145,7 +151,6 @@ export default function MessageCard({ post}) {
                     <span>{countReactions('dislike')}</span>
                 </button>
 
-                {/* Love */}
                 <button
                     className={`reaction-btn ${myReaction?.type === 'love' ? 'active' : ''}`}
                     onClick={() => handleReaction('love')}

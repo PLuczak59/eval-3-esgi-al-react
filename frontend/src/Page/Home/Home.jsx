@@ -5,7 +5,7 @@ import { useGetRequest } from "../../utils/Hooks/useGetRequest";
 
 export default function Home() {
     const [page, setPage] = useState(parseInt(localStorage.getItem('currentPage')) || 1)
-    const [totalP, setTotalP] = useState(1)
+    const [totalPage, setTotalPage] = useState(1)
     const { data, isLoading, error, refetch } = useGetRequest(`/post/page/${page}`);
     const [posts, setPosts] = useState([]);
 
@@ -13,7 +13,7 @@ export default function Home() {
         if (data) {
             console.log("Data reçue:", data)
             setPosts(data.posts || []);
-            setTotalP(data.totalPages || 1)
+            setTotalPage(data.totalPages || 1)
         }
     }, [data]);
 
@@ -71,7 +71,7 @@ export default function Home() {
 
                 <Pagination
                     currentPage={page}
-                    totalPages={totalP}
+                    totalPages={totalPage}
                     onPageChange={handlePageChange}
                 />
             </div>
