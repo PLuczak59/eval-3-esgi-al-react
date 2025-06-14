@@ -1,14 +1,13 @@
 import "./MessageCard.css";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown, faHeart, faTrash, faPencilAlt, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown, faHeart, faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import{ Modal, EditMessageForm } from '../components';
 
 export default function MessageCard({ post}) {
     const [myReaction, setMyReaction] = useState(null);
     const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
-    const [editedMessage, setEditedMessage] = useState(post.message);
     const userId = JSON.parse(localStorage.getItem('user'))?.id;
     const isMyPost = userId === post.authorId;
 

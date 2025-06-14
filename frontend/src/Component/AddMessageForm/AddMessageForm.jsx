@@ -61,13 +61,3 @@ export default function AddMessageForm({ onClose, onAddPost}) {
         </div>
     )
 }
-
-
-{/* <div className="form-group">
-    <div className="image-preview">
-        <img src={URL.createObjectURL(image)} alt="Aperçu de l'image" />
-    </div>
-    <Button type="button" onClick={() => setImage(null)} text="Supprimer l'image"/>
-    <label htmlFor="image">Changer l'image</label>
-    <input type="file" id="image" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} /> 
-    </div> */}
