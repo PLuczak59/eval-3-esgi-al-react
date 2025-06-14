@@ -1,9 +1,8 @@
-import "./AddMessageForm.css";
 import { Button } from "../components";
 import { useState } from "react";
 import { usePostRequestFormData } from "../../utils/Hooks/usePostRequest";
 
-export default function AddMessageForm({ onClose, onAddPost}) {
+export default function AddMessageForm({ onClose, onAddPost }) {
     const [content, setContent] = useState("");
     const [image, setImage] = useState(null);
     const [error, setError] = useState(null);
@@ -45,17 +44,17 @@ export default function AddMessageForm({ onClose, onAddPost}) {
         <div className="form-message">
             <div className="form-group">
                 <label htmlFor="content">Contenu du post</label>
-                <textarea id="content" name="content" onKeyUp={(e) => setContent(e.target.value)} required></textarea>
+                <textarea id="content" name="content" className="form-textarea" onKeyUp={(e) => setContent(e.target.value)} required></textarea>
             </div>
 
             <div className="form-group">
                 <label htmlFor="image">Image (optionnel)</label>
-                <input type="file" id="image" name="image" accept="image/*"  onChange={(e) => setImage(e.target.files[0])} />
+                <input type="file" id="image" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
             </div>
 
             <Button text={loading ? "Envoi en cours..." : "Envoyer"} onClick={handleSubmit} />
 
-            {error && 
+            {error &&
                 <p className="error-message">{error}</p>
             }
         </div>

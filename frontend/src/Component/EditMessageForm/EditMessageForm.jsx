@@ -1,13 +1,12 @@
-import "./EditMessageForm.css";
 import { Button } from "../components";
 import { useState } from "react";
 import { usePutRequest } from "../../utils/Hooks/usePutRequest";
 
-export default function EditMessageForm({onClose, 
-    messageData={
+export default function EditMessageForm({ onClose,
+    messageData = {
         id: "",
         message: "",
-        picture:""
+        picture: ""
     }
 }) {
     const [content, setContent] = useState(messageData.message);
@@ -51,12 +50,12 @@ export default function EditMessageForm({onClose,
         <div className="form-message">
             <div className="form-group">
                 <label htmlFor="content">Contenu du post</label>
-                <textarea id="content" name="content" value={content} onChange={(e) => setContent(e.target.value)} required></textarea>
+                <textarea id="content" name="content" className="form-textarea" value={content} onChange={(e) => setContent(e.target.value)} required></textarea>
             </div>
 
             <div className="form-group">
                 <label htmlFor="image">Image (optionnel)</label>
-                <input type="file" id="image" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} /> 
+                <input type="file" id="image" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
             </div>
 
             <Button text={loading ? "Envoi en cours..." : "Modifier"} onClick={handleSubmit} />

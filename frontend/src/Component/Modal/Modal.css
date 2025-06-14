@@ -11,6 +11,7 @@
   align-items: center;
   z-index: 1000;
   animation: fadeIn 0.3s ease-out;
+  padding: 20px;
 }
 
 .modal-close {
@@ -26,6 +27,16 @@
   max-height: 90vh;
   overflow-y: auto;
   animation: slideIn 0.3s ease-out;
+}
+
+.form-textarea {
+  width: 95%;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
 }
 
 @keyframes fadeIn {
@@ -48,8 +59,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 15px 20px;
   border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #064494;
 }
 
 .modal-close-button {
@@ -63,4 +80,76 @@
 
 .modal-close-button:hover {
   color: #000;
+}
+
+/* Styles pour le mode sombre */
+.app-dark .modal-content {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.app-dark .modal-header {
+  border-bottom: 1px solid #333;
+}
+
+.app-dark .modal-header h2 {
+  color: #f1f1f1;
+}
+
+.app-dark .modal-close-button {
+  color: #aaa;
+}
+
+.app-dark .modal-close-button:hover {
+  color: #fff;
+}
+
+/* Styles pour les formulaires dans la modal */
+.modal-content > * {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.app-dark .form-group label {
+  color: #f1f1f1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-actions button.primary {
+  background-color: #064494;
+  color: white;
+}
+
+.form-actions button.secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.app-dark .form-actions button.secondary {
+  background-color: #333;
+  color: #eee;
 }
