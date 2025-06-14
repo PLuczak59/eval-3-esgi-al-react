@@ -8,7 +8,8 @@ const getAll = async (req, res, next) => {
         include: [
             {model: Emoticon},
             {model: User, attributes: ['id', 'nickname']}
-        ]
+        ],
+        order: [['createdAt', 'DESC']]
     });
     res.status(200).json(result);
 }
@@ -28,7 +29,8 @@ const getPage = async (req,res) => {
                 {model: User, attributes: ['id', 'nickname']}
             ],
             limit:5,
-            offset:(req.params.page-1)*5
+            offset:(req.params.page-1)*5,
+            order: [['createdAt', 'DESC']]
         });
         
         res.status(200).json({

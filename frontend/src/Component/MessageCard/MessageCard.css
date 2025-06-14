@@ -16,8 +16,9 @@
 
 .message-header {
   display: flex;
+  flex-wrap: wrap; 
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
 }
 
@@ -172,4 +173,17 @@
 .reaction-btn:nth-child(3).active {
   background-color: #E41E3F;
   color: white;
+}
+
+.post-metadata {
+  margin-left: auto; 
+  margin-right: 10px;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.post-date {
+  font-size: 13px;
+  color: #888;
+  display: inline-block;
 }

@@ -69,7 +69,8 @@ const dataset = async () => {
                 authorId: users[2].id
             },
             {
-                message: "Quelqu'un aurait des recommandations de livres sur JavaScript ?",
+                message: "Petite blanquette aujourd'hui ! Miam",
+                picture: "blanquette.jpg1749816755934.jpg",
                 authorId: users[3].id
             },
             {
