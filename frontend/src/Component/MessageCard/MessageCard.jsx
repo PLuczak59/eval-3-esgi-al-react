@@ -16,7 +16,7 @@ export default function MessageCard({ post, onRefresh }) {
     const [localEmoticons, setLocalEmoticons] = useState(post.emoticons || []);
 
     const { postData } = usePostRequest('/emoticon');
-    const { isLoading: deleteLoading, deleteData } = useDeleteRequest();
+    const { deleteData } = useDeleteRequest();
 
     function formatDate(dateString) {
         const date = new Date(dateString)
@@ -42,27 +42,16 @@ export default function MessageCard({ post, onRefresh }) {
 
     const handleReaction = async (type) => {
         setLoading(true);
-        const token = localStorage.getItem('token');
 
         try {
             if (myReaction && myReaction.type === type) {
-                await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/emoticon/${myReaction.id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                });
+                await deleteData(`/emoticon/${myReaction.id}`);
 
                 setLocalEmoticons(prev => prev.filter(e => e.id !== myReaction.id))
                 setMyReaction(null);
             } else {
                 if (myReaction) {
-                    await fetch(`${import.meta.env.VITE_REACT_APP_URL_BACKEND}/emoticon/${myReaction.id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                        }
-                    });
+                    await deleteData(`/emoticon/${myReaction.id}`);
 
                     setLocalEmoticons(prev => prev.filter(e => e.id !== myReaction.id))
                 }
@@ -131,11 +120,11 @@ export default function MessageCard({ post, onRefresh }) {
 
                 {isMyPost &&
                     <div className="message-actions">
-                        <button className="action-btn edit" onClick={() => setModalOpen(true)} disabled={loading || deleteLoading}>
+                        <button className="action-btn edit" onClick={() => setModalOpen(true)} disabled={loading}>
                             <FontAwesomeIcon icon={faPencilAlt} />
                         </button>
 
-                        <button className="action-btn delete" onClick={handleDelete} disabled={loading || deleteLoading}>
+                        <button className="action-btn delete" onClick={handleDelete} disabled={loading}>
                             <FontAwesomeIcon icon={faTrash} />
                         </button>
                     </div>
