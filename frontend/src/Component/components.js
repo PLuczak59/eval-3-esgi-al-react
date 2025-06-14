@@ -7,3 +7,4 @@ export { default as Modal } from './Modal/Modal';
 export { default as Toolbar } from './Toolbar/Toolbar';
 export { default as AddMessageForm } from './AddMessageForm/AddMessageForm';
 export { default as EditMessageForm } from './EditMessageForm/EditMessageForm';
+export { default as Pagination } from './Pagination/Pagination';

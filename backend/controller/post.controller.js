@@ -17,15 +17,28 @@ const getPage = async (req,res) => {
     if(!req.params.page){
         return res.status(400).json({error: "Vous devez sélectionner une page"});
     }
-    let result = await Post.findAll({
-        include: [
-            {model: Emoticon},
-            {model: User, attributes: ['id', 'nickname']}
-        ],
-        limit:5,
-        offset:(req.params.page-1)*5
-    });
-    res.status(200).json(result);
+    
+    try {
+        const count = await Post.count()
+        const totalPages = Math.ceil(count / 5)
+        
+        let result = await Post.findAll({
+            include: [
+                {model: Emoticon},
+                {model: User, attributes: ['id', 'nickname']}
+            ],
+            limit:5,
+            offset:(req.params.page-1)*5
+        });
+        
+        res.status(200).json({
+            posts: result,
+            totalPages: totalPages,
+            currentPage: parseInt(req.params.page)
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 }
 
 const getById = async (req, res, next) => {
