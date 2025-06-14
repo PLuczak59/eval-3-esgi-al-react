@@ -74,6 +74,7 @@ npm run dev
 ```
 
 ## 📁 Structure du projet
+```
 ├── backend/            # API Node.js et Express
 │   ├── controller/     # Contrôleurs API
 │   ├── images/         # Images téléchargées
@@ -87,3 +88,4 @@ npm run dev
         ├── Component/  # Composants UI
         ├── Page/       # Pages de l'application
         └── utils/      # Utilitaires et hooks
+```
